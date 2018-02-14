@@ -27,7 +27,6 @@ for line in sys.stdin:
 
     # If this is an entry from parking-violations.csv
     if (len(entry) == 22):
-        # Set row, column, and value for this entry
         summonsStatus, summonsNumber = tryParseInt(entry[0])
         plateId = entry[14]
         violationPrecinctStatus, violationPrecinct = tryParseInt(entry[6])
