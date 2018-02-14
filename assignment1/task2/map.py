@@ -18,16 +18,10 @@ def tryParseInt(input):
 
 # input comes from STDIN (stream data that goes to the program)
 for line in sys.stdin:
-    
-    # Remove leading and trailing whitespace
     line = line.strip()
-
-    # Split line into array of entry data
     entry = line.split(",")
 
-    # If this is an entry from parking-violations.csv
     violationCodeStatus, violationCode = tryParseInt(entry[2])
-
     if violationCodeStatus:
         print('{0:d}\t{1:d}'.format(violationCode, 1))
 
