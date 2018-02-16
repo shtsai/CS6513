@@ -21,7 +21,8 @@ def tryParseInt(input):
 
 
 currentKey = None
-currentStatus = None    # True: paid, False: unpaid
+currentOpen = False 
+currentAll = False
 currentValue = None
 
 # input comes from STDIN (stream data that goes to the program)
@@ -37,30 +38,33 @@ for line in sys.stdin:
 
     #If we are still on the same key...
     if key == currentKey:
-        if currentStatus == False or status == "Open":
-            currentStatus = False
+        if status == "Open":
+            currentOpen = True
+        elif status == "All":
+            currentAll = True
+            currentValue = plateId + ", " + violationPrecinct + ", " + violationCode + ", " + issueDate
 
     #Otherwise, if this is a new key...
     else:
         #If this is a new key and not the first key we've seen
         if currentKey:
-            if not currentStatus:
-                continue
-            else:
+            if (not currentOpen) and currentAll:
                 print('{0:s}\t{1:s}'.format(currentKey, currentValue))
+            currentOpen = False
+            currentAll = False
 
         currentKey = key
         if status == "Open":
-            currentStatus = False
+            currentOpen = True
             currentValue = None
-        else:
-            currentStatus = True
+        elif status == "All":
+            currentAll = True
             currentValue = plateId + ", " + violationPrecinct + ", " + violationCode + ", " + issueDate
 
 
 
 # Compute/output result for the last key (your code goes here)
-if currentKey and currentStatus:
+if currentKey and (not currentOpen) and currentAll:
     print('{0:s}\t{1:s}'.format(currentKey, currentValue))
 
 

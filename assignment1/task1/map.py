@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # map function for task 1
 
+import os
 import sys
 import string
 #import numpy
@@ -26,7 +27,8 @@ for line in sys.stdin:
     entry = line.split(",")
 
     # If this is an entry from parking-violations.csv
-    if (len(entry) == 22):
+    #if (len(entry) == 22):
+    if "parking" in os.environ.get("mapreduce_map_input_file"):
         summonsStatus, summonsNumber = tryParseInt(entry[0])
         plateId = entry[14]
         violationPrecinctStatus, violationPrecinct = tryParseInt(entry[6])
@@ -42,7 +44,8 @@ for line in sys.stdin:
 
 
     # Otherwise, if this is an entry from open-violations.csv
-    else:
+    #else:
+    elif "open" in os.environ.get("mapreduce_map_input_file"):
         summonsStatus, summonsNumber = tryParseInt(entry[0])
         status = "Open"
 
