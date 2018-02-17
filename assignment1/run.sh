@@ -32,7 +32,17 @@ elif [ $# -eq 2 ]; then
 		python $TASK/map.py |
 		sort -n |
 		python $TASK/reduce.py
-	fi
+	elif [ $OPERATION = "all" ]; then
+		cat small-parking-violations.csv |
+		python $TASK/map.py |
+		sort -n |
+		python $TASK/reduce.py
+	elif [ $OPERATION = "open" ]; then
+		cat small-open-violations.csv |
+		python $TASK/map.py |
+		sort -n |
+		python $TASK/reduce.py
+	fi	
 else
 	echo "too many arguments"
 fi
