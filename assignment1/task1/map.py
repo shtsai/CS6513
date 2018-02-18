@@ -17,8 +17,8 @@ for line in sys.stdin:
     entry = line.split(",")
 
     # If this is an entry from parking-violations.csv
-    if (len(entry) == 22):
-    #if "parking" in os.environ.get("mapreduce_map_input_file"):
+    #if (len(entry) == 22):
+    if "parking" in os.environ.get("mapreduce_map_input_file"):
         summonsNumber = entry[0]
         plateId = entry[14]
         violationPrecinct = entry[6]
@@ -31,8 +31,8 @@ for line in sys.stdin:
 
 
     # Otherwise, if this is an entry from open-violations.csv
-    else:
-    #elif "open" in os.environ.get("mapreduce_map_input_file"):
+    #else:
+    elif "open" in os.environ.get("mapreduce_map_input_file"):
         summonsNumber = entry[0]
         status = "Open"
 
