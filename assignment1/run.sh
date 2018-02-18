@@ -8,26 +8,11 @@ hfs="$HADOOP_EXE fs"
 hjs="$HADOOP_EXE jar $HADOOP_LIBPATH/$HADOOP_STREAMING"
 
 
-if [ $# -eq 1 ]; then
-	TASK=$1
-
-	# remove previous output
-	$hfs -rm -r $TASK.out
-
-	$hjs \
-	-D mapreduce.job.reduces=2 \
-	-files /home/st3127/assignment1/$TASK \
-	-mapper $TASK/map.py \
-	-reducer $TASK/reduce.py \
-	-input /user/ecc290/HW1data/parking-violations.csv \
-	-input /user/ecc290/HW1data/open-violations.csv \
-	-output /user/st3127/$TASK.out 
-
-elif [ $# -eq 2 ]; then
-	TASK=$1
+if [ "$1" = "local" ]; then
 	OPERATION=$2
+	TASK=$3
 	echo $OPERATION
-	if [ $OPERATION = "small" ]; then
+	if [ $OPERATION = "both" ]; then
 		cat small-open-violations.csv small-parking-violations.csv |
 		python $TASK/map.py |
 		sort -n |
@@ -43,6 +28,41 @@ elif [ $# -eq 2 ]; then
 		sort -n |
 		python $TASK/reduce.py
 	fi	
+elif [ $# -eq 3 ]; then
+	TASK=$1
+	REDUCER=$2
+	OPERATION=$3
+
+	# remove previous output
+	$hfs -rm -r $TASK.out
+
+	if [ $OPERATION = "both" ]; then
+		$hjs \
+		-D mapreduce.job.reduces=$REDUCER \
+		-files /home/st3127/assignment1/$TASK \
+		-mapper $TASK/map.py \
+		-reducer $TASK/reduce.py \
+		-input /user/ecc290/HW1data/parking-violations.csv \
+		-input /user/ecc290/HW1data/open-violations.csv \
+		-output /user/st3127/$TASK.out 
+	elif [ $OPERATION = "all" ]; then
+		$hjs \
+		-D mapreduce.job.reduces=$REDUCER \
+		-files /home/st3127/assignment1/$TASK \
+		-mapper $TASK/map.py \
+		-reducer $TASK/reduce.py \
+		-input /user/ecc290/HW1data/parking-violations.csv \
+		-output /user/st3127/$TASK.out 
+	elif [ $OPERATION = "open" ]; then
+		$hjs \
+		-D mapreduce.job.reduces=$REDUCER \
+		-files /home/st3127/assignment1/$TASK \
+		-mapper $TASK/map.py \
+		-reducer $TASK/reduce.py \
+		-input /user/ecc290/HW1data/open-violations.csv \
+		-output /user/st3127/$TASK.out 
+	fi	
+	
 else
-	echo "too many arguments"
+	echo "INVALID arguments"
 fi
