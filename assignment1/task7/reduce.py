@@ -28,9 +28,9 @@ for line in sys.stdin:
             weekendCount += 1
     else:
         if currentCode:
-            weekendAverage = weekendCount / weekendDays
-            weekAverage = weekCount / weekDays
-            print('{0:s}\t{1:f}, {2:f}'.format(currentCode, weekendAverage, weekAverage))
+            weekendAverage = round(weekendCount / weekendDays, 2)
+            weekAverage = round(weekCount / weekDays, 2)
+            print('{0:s}\t{1:.2f}, {2:.2f}'.format(currentCode, weekendAverage, weekAverage))
             weekCount = 0
             weekendCount = 0
 
@@ -43,8 +43,7 @@ for line in sys.stdin:
 
 # Compute/output result for the last key
 if currentCode:
-    weekendAverage = weekendCount / weekendDays
-    weekAverage = weekCount / weekDays
-    print('{0:s}\t{1:f}, {2:f}'.format(currentCode, weekendAverage, weekAverage))
-
+    weekendAverage = round(weekendCount / weekendDays, 2)
+    weekAverage = round(weekCount / weekDays, 2)
+    print('{0:s}\t{1:.2f}, {2:.2f}'.format(currentCode, weekendAverage, weekAverage))
 
