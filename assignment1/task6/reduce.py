@@ -11,20 +11,10 @@ import heapq
 
 # import numpy
 
-class Vehicle(object):
-    def __init__(self, id, violationCount):
-        self.id = id
-        self.violationCount = violationCount
-
-    def __lt__(self, other):
-        return self.violationCount < other.violationCount
-
 
 '''
     Try parse input string to integer.
 '''
-
-
 def tryParseInt(input):
     try:
         intValue = int(input)
@@ -33,14 +23,14 @@ def tryParseInt(input):
         return False, -1
 
 def addToHeap(id, count, top, bottom):
-    currentVehicleTop = Vehicle(id, count)
+    currentVehicleTop = (count, id)
     if len(top) < 10:
         heapq.heappush(top, currentVehicleTop)
     elif top[0] < currentVehicleTop:
         heapq.heappop(top)
         heapq.heappush(top, currentVehicleTop)
 
-    currentVehicleButtom = Vehicle(id, -count)
+    currentVehicleButtom = (-count, id)
     if len(bottom) < 10:
         heapq.heappush(bottom, currentVehicleButtom)
     elif bottom[0] < currentVehicleButtom:
@@ -71,23 +61,23 @@ for line in sys.stdin:
 
     else:
         if currentKey:
-            addToHeap(key, currentCount, top, bottom)
+            addToHeap(currentKey, currentCount, top, bottom)
 
         currentKey = key
         currentCount = intValue
 
 # process last key
 if currentKey:
-    addToHeap(key, currentCount, top, bottom)
+    addToHeap(currentKey, currentCount, top, bottom)
 
 # Output results
 topVehicles = []
 while len(top) != 0:
     topVehicles.append(heapq.heappop(top))
 for v in reversed(topVehicles):
-    print('{0:s}\t{1:d}'.format(v.id, v.violationCount))
+    print('{0:s}\t{1:d}'.format(v[1], v[0]))
 
 while len(bottom) != 0:
     v = heapq.heappop(bottom)
-    print('{0:s}\t{1:d}'.format(v.id, -v.violationCount))
+    print('{0:s}\t{1:d}'.format(v[1], -v[0]))
 
