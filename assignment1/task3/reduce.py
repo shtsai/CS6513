@@ -14,7 +14,7 @@ import string
 '''
 def tryParseFloat(input):
     try:
-        floatValue = float(input)
+        floatValue = float(input.strip())
         return True, floatValue
     except ValueError:
         return False, -1
@@ -22,7 +22,7 @@ def tryParseFloat(input):
 
 currentKey = None
 currentValue = 0.0
-currentCount = 0
+currentCount = 0.0
 
 # input comes from STDIN (stream data that goes to the program)
 for line in sys.stdin:
@@ -36,19 +36,23 @@ for line in sys.stdin:
 
     if key == currentKey:
         currentValue += amount
-        currentCount += 1
+        currentCount += 1.0
 
     else:
         if currentKey:
-            print('{0:s}\t{1:f}, {2:f}'.format(currentKey, currentValue, currentValue / currentCount))
+            total = round(currentValue, 2)
+            average = round(currentValue / currentCount, 2)
+            print('{0:s}\t{1:.2f}, {2:.2f}'.format(currentKey, total, average))
 
         currentKey = key
         currentValue = amount
-        currentCount = 1
+        currentCount = 1.0
 
 
 # Compute/output result for the last key
 if currentKey:
-    print('{0:s}\t{1:f}, {2:f}'.format(currentKey, currentValue, currentValue / currentCount))
+    total = round(currentValue, 2)
+    average = round(currentValue / currentCount, 2)
+    print('{0:s}\t{1:.2f}, {2:.2f}'.format(currentKey, total, average))
 
 
