@@ -3,13 +3,13 @@
 
 import sys
 import string
+import csv
 #import numpy
 
 # input comes from STDIN (stream data that goes to the program)
-for line in sys.stdin:
-    line = line.strip()
-    entry = line.split(",")
 
+data = csv.reader(sys.stdin)
+for entry in data:
     licenceType = entry[2]
     amount = entry[13]
     print('{0:s}\t{1:s}'.format(licenceType, amount))
