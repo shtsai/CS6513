@@ -3,13 +3,12 @@
 
 import sys
 import string
+import csv
 #import numpy
 
 # input comes from STDIN (stream data that goes to the program)
-for line in sys.stdin:
-    line = line.strip()
-    entry = line.split(",")
-
+data = csv.reader(sys.stdin)
+for entry in data:
     plateId = entry[14]
     state = entry[16]
 
