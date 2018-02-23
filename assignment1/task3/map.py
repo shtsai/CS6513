@@ -11,7 +11,7 @@ import csv
 data = csv.reader(sys.stdin)
 for entry in data:
     licenceType = entry[2]
-    amount = entry[13]
+    amount = entry[12]
     print('{0:s}\t{1:s}'.format(licenceType, amount))
 
 
