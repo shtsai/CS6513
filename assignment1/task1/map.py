@@ -3,19 +3,14 @@
 
 import os
 import sys
+import csv
 import string
 #import numpy
 
 
 # input comes from STDIN (stream data that goes to the program)
-for line in sys.stdin:
-    
-    # Remove leading and trailing whitespace
-    line = line.strip()
-
-    # Split line into array of entry data
-    entry = line.split(",")
-
+data = csv.reader(sys.stdin)
+for entry in data:
     # If this is an entry from parking-violations.csv
     #if (len(entry) == 22):
     if "parking" in os.environ.get("mapreduce_map_input_file"):
