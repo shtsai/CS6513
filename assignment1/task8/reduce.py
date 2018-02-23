@@ -42,9 +42,9 @@ for line in sys.stdin:
 
         currentKey = key
         if column == '0':
-            currentColumn = "Make"
+            currentColumn = "vehicle_make"
         elif column == '1':
-            currentColumn = "Color"
+            currentColumn = "vehicle_color"
         currentTerm = term
         currentCount = intValue
 
