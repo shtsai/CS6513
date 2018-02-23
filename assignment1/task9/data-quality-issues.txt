@@ -1,0 +1,7 @@
+1. The data contains a lot of noises and it is not clean.
+   There are many misplaced things like quotation marks and commas in the data files.
+
+2. The data field values are not uniform. For example, in the color field, for the same color white,
+   there are many different values, such as "WH", "WHT", "WHITE", etc. This makes grouping data difficult.
+
+3. There are many empty values.
