@@ -1,8 +1,4 @@
 #!/usr/bin/env python
-# Reduce function for computing matrix multiply A*B
-
-# Input arguments:
-# variable n should be set to the inner dimension of the matrix product (i.e., the number of columns of A/rows of B)
 
 import sys
 import string
@@ -62,6 +58,11 @@ if currentKey:
 topVehicles = []
 while len(top) != 0:
     topVehicles.append(heapq.heappop(top))
-for v in reversed(topVehicles):
+
+topVehicles = sorted(topVehicles, key = lambda x : (-x[0], x[1]))
+for v in topVehicles:
     print('{0:s}\t{1:d}'.format(v[1], v[0]))
+
+#for v in reversed(topVehicles):
+#    print('{0:s}\t{1:d}'.format(v[1], v[0]))
 
