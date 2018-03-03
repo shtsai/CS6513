@@ -33,7 +33,7 @@ for line in sys.stdin:
         currentCount += 1
     else:
         if currentKey:
-            print('{0:s}\t{1:s} {2:d}'.format(currentColumn, currentTerm, currentCount))
+            print('{0:s}\t{1:s}, {2:d}'.format(currentColumn, currentTerm, currentCount))
             currentCount = 0
 
         currentKey = key
@@ -47,5 +47,5 @@ for line in sys.stdin:
 
 # Compute/output result for the last key
 if currentKey:
-    print('{0:s}\t{1:s} {2:d}'.format(currentColumn, currentTerm, currentCount))
+    print('{0:s}\t{1:s}, {2:d}'.format(currentColumn, currentTerm, currentCount))
 
