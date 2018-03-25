@@ -1,0 +1,16 @@
+*****Core Spark Tests*****
+Task 1: Passed.
+Task 2: Passed.
+Task 3: Passed.
+Task 4: Passed.
+Task 5: Passed.
+Task 6: Passed.
+Task 7: Passed.
+*****SparkSQL Tests*****
+Task 1: Passed.
+Task 2: Passed.
+Task 3: Passed.
+Task 4: Passed.
+Task 5: Passed.
+Task 6: Passed.
+Task 7: Passed.
